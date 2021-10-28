@@ -28,13 +28,13 @@ import (
 
 // add your app and user token below
 const token = ""
-const user 	= ""
+const user = ""
 
 func push(m string) {
 	params := url.Values{}
-	params.Add("token",token)
+	params.Add("token", token)
 	params.Add("user", user)
-	params.Add("message",m)
+	params.Add("message", m)
 
 	resp, err := http.PostForm("https://api.pushover.net/1/messages.json", params)
 	if err != nil {
