@@ -30,10 +30,14 @@ import (
 const token = ""
 const user = ""
 
+// define title or else hostname is used.
+var title = ""
+
 func push(m string) {
 	params := url.Values{}
 	params.Add("token", token)
 	params.Add("user", user)
+	params.Add("title", title)
 	params.Add("message", m)
 
 	resp, err := http.PostForm("https://api.pushover.net/1/messages.json", params)
@@ -48,13 +52,17 @@ func push(m string) {
 			}
 		}(resp.Body)
 		body, _ := ioutil.ReadAll(resp.Body)
-
 		fmt.Println(string(body))
 	}
 
 }
 
 func main() {
+
+	if title == "" {
+		title, _ = os.Hostname()
+	}
+
 	reader := bufio.NewScanner(os.Stdin)
 	for {
 		reader.Scan()
@@ -64,7 +72,6 @@ func main() {
 			time.Sleep(time.Second)
 			break
 		}
-
 		go push(line)
 	}
 }
