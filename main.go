@@ -26,13 +26,6 @@ import (
 	"time"
 )
 
-// add your app and user token below
-const token = ""
-const user = ""
-
-// define title or else hostname is used.
-var title = ""
-
 func push(m string) {
 	params := url.Values{}
 	params.Add("token", token)
